@@ -1,31 +1,13 @@
 pipeline {
     agent any
+    
+    environment {
+        NGINX_DEV_IP = '34.245.91.68'
+        NGINX_PROD_IP = '52.210.134.244'
+        insight_day_key_name = 'insight-day-key'
+    }
+
     stages {
-      stage('Setup parameters') {
-        steps {
-          script { 
-            properties([
-              parameters([
-                string(
-                    defaultValue: '34.245.91.68', 
-                    name: 'NGINX_DEV_IP', 
-                    trim: true
-                ),
-                string(
-                    defaultValue: '52.210.134.244', 
-                    name: 'NGINX_PROD_IP', 
-                    trim: true
-                ),
-                string(
-                    defaultValue: 'insight-day-key', 
-                    name: 'insight_day_key', 
-                    trim: true
-                )
-              ])
-            ])
-          }
-        }
-      }
       stage('Code Checkout') {
         steps {
           checkout scm
